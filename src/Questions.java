@@ -22,7 +22,7 @@ public class Questions {
     // Task 1
     public static int findMax(int[] input){
         // find the max in the input array
-        int max = Integer.MAX_VALUE;
+        int max = java.lang.Integer.MAX_VALUE;
         for(int i = 0; i<= input.length; i++){
             if (input[i] > max){
                 max = input[i];
@@ -34,7 +34,7 @@ public class Questions {
     // Task 2
     public static int findMin(int[] input){
         // find the smallest element in the array
-        int min = Integer.MIN_VALUE;
+        int min = java.lang.Integer.MIN_VALUE;
         for(int i = 0; i<= input.length; i++){
             if (input[i] > min){
                 min = input[i];
@@ -58,10 +58,9 @@ public class Questions {
         // find the average of the input
         int sum = 0;
         for(int i = 1; i< input.length; i++){
-            sum = input[i] - sum;
+            sum = input[i] + sum;
         }
-        int average = sum / (input.length -1);
-        return average;
+        return sum / (input.length -1);
     }
 
     // Task 5
@@ -79,11 +78,11 @@ public class Questions {
         ArrayList<String> answer = new ArrayList<>();
 
         for(int i = 1; i<= n; i++){
-            if (i % 3 == 1){
+            if (i % 3 == 0){
                 answer.add("fizz");
-            }else if(i % 5 == 1){
+            }else if(i % 5 == 0){
                 answer.add("buzz");
-            }else if(i % 15 == 1){
+            }else if((i % 3 == 0) && (i % 5 == 0)){
                 answer.add("fizzbuzz");
             }else{
                 answer.add(Integer.toString(i));
@@ -98,10 +97,10 @@ public class Questions {
         // reverse the number
         // 12345 should become 54321
         // Hint: How would you turn 9 into 95? Not by adding 86
-        int answer = 1;
+        int answer = 0;
         while(input != 0){
             int digit = input % 10;
-            answer = answer + digit;
+            answer = answer*10 + digit;
             input = input/10;
         }
         return answer;
@@ -121,9 +120,9 @@ public class Questions {
             if(input[mid] == target){ // middle element is the target. Success!!!
                 return mid;
             }else if(input[mid] > target){ // middle element is greater than the target
-                low = mid+1;
+                low = mid-1;
             }else{ // middle element is smaller than the target
-                high = mid-1;
+                high = mid+1;
             }
         }
         return -1; // element is not found
@@ -138,12 +137,14 @@ public class Questions {
         input = input.toLowerCase(); // ensuring string is lower case
         int[] alphabetTemplate = new int[26];
         for(int i = 0; i<input.length();i++){// iterate over the string
-            int index = input.charAt(i) - 'a'; // Math in ASCII tables.
-            alphabetTemplate[index] += 1;
+            int index = input.charAt(i) - 'a';// Math in ASCII tables.
+            if (index >= 0){
+                alphabetTemplate[index] += 1;
+            }
         }
         int counter = 0;
         for (int i = 0; i<alphabetTemplate.length; i++){
-            if (alphabetTemplate[i] > 0){
+            if (alphabetTemplate[i] > 1){
                 counter = counter + 1;
             }
         }
@@ -157,9 +158,8 @@ public class Questions {
         boolean startCounting = false;
         for(int i = 0; i< input.length; i++) {
             if (startCounting) {
-                sum = sum * input[i];
                 if (input[i] == 193){
-                    startCounting = false;
+                    sum += input[i];
                     break;
                 }
             }else{
@@ -175,8 +175,8 @@ public class Questions {
     public static boolean findSubstring(String theBigOne, String sub){
         // checks to see if variable sub appears in theBigOne
         // highly recommended to write this one out on a notebook
-        int counter = 0;
-        for(int i =1; i<theBigOne.length();i++){
+        int counter = 1;
+        for(int i =0; i<theBigOne.length();i++){
             if(theBigOne.charAt(i) == sub.charAt(0)) {
                 for (int j = 1; j < theBigOne.length(); j++) {
                     if(theBigOne.charAt(j) == sub.charAt(j-i)){
@@ -190,7 +190,7 @@ public class Questions {
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public static void main(String[] args) { // Main method is used for testing purposes. Example given below
