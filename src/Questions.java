@@ -100,7 +100,7 @@ public class Questions {
         int answer = 0;
         while(input != 0){
             int digit = input % 10;
-            answer = answer*10 + digit;
+            answer += digit;
             input = input/10;
         }
         return answer;
@@ -120,9 +120,9 @@ public class Questions {
             if(input[mid] == target){ // middle element is the target. Success!!!
                 return mid;
             }else if(input[mid] > target){ // middle element is greater than the target
-                low = mid-1;
+                low = mid+1;
             }else{ // middle element is smaller than the target
-                high = mid+1;
+                high = mid-1;
             }
         }
         return -1; // element is not found
@@ -144,9 +144,7 @@ public class Questions {
         }
         int counter = 0;
         for (int i = 0; i<alphabetTemplate.length; i++){
-            if (alphabetTemplate[i] > 1){
                 counter = counter + 1;
-            }
         }
         return counter;
     }
